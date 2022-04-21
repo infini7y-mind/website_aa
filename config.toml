@@ -1,0 +1,13 @@
+baseURL = ''
+languageCode = 'en-us'
+title = 'Andre Afonso'
+theme = 'sam'
+
+
+[[params.mainMenu]]
+    link = "/posts"
+    text = "Some things I write"
+
+[[params.mainMenu]]
+    link = "/about"
+    text = "Who's Andre?"

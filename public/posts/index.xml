@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Andre Afonso</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Andre Afonso</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Apr 2022 04:50:20 +0100</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Owasp Juiceshop</title>
+      <link>/posts/owasp-juiceshop/</link>
+      <pubDate>Thu, 21 Apr 2022 04:50:20 +0100</pubDate>
+      
+      <guid>/posts/owasp-juiceshop/</guid>
+      <description>Some things that were unsolved that I found out in the demo version :)
+Target: OWASP Juice Shop
+ Bully Chatbot&amp;nbsp;¶ You have to release your inner nagger and ask repeatedly for coupons :)
+What worked for me was to type coupons +=1
+ Repetitive Registration&amp;nbsp;¶ This one is pretty simple.
+Fill out everything correctly, then go to the first &amp;ldquo;Password&amp;rdquo; field and change it.</description>
+    </item>
+    
+    <item>
+      <title>Static website with wordpress? No thanks!</title>
+      <link>/posts/static-website/</link>
+      <pubDate>Tue, 19 Apr 2022 01:47:08 +0100</pubDate>
+      
+      <guid>/posts/static-website/</guid>
+      <description>I had a fancy shmancy website with wordpress, and I was very proud! Nice pentest tooling logos, badges for showing off, great header image. But besides terrible loading times, 3 hours to set up a 2min reading time blog post or hard time customizing css&amp;hellip; none of that really showed what I was actually learning or even who I really became after entering the cybersec world.
+ Then, in a video of my brother David, I remembered that his guest Graham Helton (great guy) had a great website!</description>
+    </item>
+    
+    <item>
+      <title>picoCTF web exploitation writeups</title>
+      <link>/posts/picoctf-web/</link>
+      <pubDate>Wed, 23 Mar 2022 23:42:04 +0100</pubDate>
+      
+      <guid>/posts/picoctf-web/</guid>
+      <description>Hey, this is a simple writeup on the challenges provided by picoCTF
+Hope you find it useful ;)
+ Get aHEAD&amp;nbsp;¶ For this challenge you should think about the HTTP request methods (GET, POST, PUT, DELETE, HEAD,&amp;hellip;)
+See the HEAD there? Does it look like something you have on the title of the challenge? xP
+The HEAD gives you the website&amp;rsquo;s metadata. It should do the same thing as a GET but without all the body, although sometimes they are different.</description>
+    </item>
+    
+  </channel>
+</rss>

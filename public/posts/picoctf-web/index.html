@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<title>
+    picoCTF web exploitation writeups - Andre Afonso
+</title>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/style.sass" integrity="" crossorigin="anonymous" media="screen">
+
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="picoCTF web exploitation writeups"/>
+<meta name="twitter:description" content="Hey, this is a simple writeup on the challenges provided by picoCTF
+Hope you find it useful ;)
+ Get aHEAD&nbsp;¶ For this challenge you should think about the HTTP request methods (GET, POST, PUT, DELETE, HEAD,&hellip;)
+See the HEAD there? Does it look like something you have on the title of the challenge? xP
+The HEAD gives you the website&rsquo;s metadata. It should do the same thing as a GET but without all the body, although sometimes they are different."/>
+
+<meta property="og:title" content="picoCTF web exploitation writeups" />
+<meta property="og:description" content="Hey, this is a simple writeup on the challenges provided by picoCTF
+Hope you find it useful ;)
+ Get aHEAD&nbsp;¶ For this challenge you should think about the HTTP request methods (GET, POST, PUT, DELETE, HEAD,&hellip;)
+See the HEAD there? Does it look like something you have on the title of the challenge? xP
+The HEAD gives you the website&rsquo;s metadata. It should do the same thing as a GET but without all the body, although sometimes they are different." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/picoctf-web/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-23T23:42:04+01:00" />
+<meta property="article:modified_time" content="2022-03-23T23:42:04+01:00" />
+
+
+
+    
+
+    
+    
+    
+    <title>
+        
+        picoCTF web exploitation writeups
+        
+    </title>
+</head>
+
+<body>
+    
+    
+    <header class="wrap flex-container">
+        <h1>picoCTF web exploitation writeups</h1>
+    </header>
+    
+    <main class="wrap">
+        
+<div class="flex-container">
+    <aside role="complementary">
+        Wed Mar 23, 2022 &#183; 473 words
+        <div class="tag-container">
+            
+            
+            <span class="tag">
+                <a href="/tags/writeup/">
+                    writeup
+                </a>
+            </span>
+            
+            
+        </div>
+    </aside>
+    <hr />
+    <article role="article">
+        <p>Hey, this is a simple writeup on the challenges provided by <a href="https://picoctf.org/">picoCTF</a></p>
+<p>Hope you find it useful ;)</p>
+<p> </p>
+
+<h2 id="get-ahead" class="anchor-link"><a href="#get-ahead">Get aHEAD<span class="pilcrow">&nbsp;¶</span></a></h2>
+<p>For this challenge you should think about the HTTP request methods (GET, POST, PUT, DELETE, HEAD,&hellip;)</p>
+<p>See the HEAD there? Does it look like something you have on the title of the challenge? xP</p>
+<p>The HEAD gives you the website&rsquo;s metadata. It should do the same thing as a GET but without all the body, although sometimes they are different.</p>
+<p>You can use Burp Suite to check the responses but I think there&rsquo;s a simpler way to get it! Open up a terminal and type:</p>
+<pre tabindex="0"><code>curl -I http://mercury.picoctf.net:28916/
+</code></pre><p>If you go to the curl options, the -I is how youll get the HEAD.</p>
+<p> </p>
+
+<h2 id="cookie" class="anchor-link"><a href="#cookie">Cookie<span class="pilcrow">&nbsp;¶</span></a></h2>
+<p>This challenge puts your dev tools knowledge to the test eheh</p>
+<p>In Google Chrome press F12 and go to the &ldquo;Application&rdquo; tab.</p>
+<p>You&rsquo;ll see the cookies there, mess around with the value and find the right one to give you the challenge flag.</p>
+<p>It&rsquo;s funny that you can think about several ways of using this in a pentest or vulnerability assessment.</p>
+<p>One of the most common examples is an e-commerce website where normally the checkout carts could have a cookie session ID that you could change and see the cart of another person. Now imagine this on a bank application where you could have access to other people&rsquo;s accounts and mess with it&hellip; Nasty!</p>
+<p> </p>
+
+<h2 id="insp3ct0r" class="anchor-link"><a href="#insp3ct0r">Insp3ct0r<span class="pilcrow">&nbsp;¶</span></a></h2>
+<p>Knowing the previous one, this will be a walk in the park!</p>
+<p>Just go to the &ldquo;Sources&rdquo; tab this time and see all the files there.</p>
+<p>Normally, when developing websites with HTML, CSS and JavaScript, either using all of them or just a few, developers often leave notes from previous tasks that are not supposed to be there. And they could be admin credentials, hidden pages, undeleted login info or other high security risk information that can be exploited.</p>
+<p> </p>
+
+<h2 id="scavenger-hunt" class="anchor-link"><a href="#scavenger-hunt">Scavenger Hunt<span class="pilcrow">&nbsp;¶</span></a></h2>
+<p>This is a little bit trickier than the last one.</p>
+<p>Yes you start exactly like the last one but you&rsquo;ll have to master some other web shenanigans :)</p>
+<p>So lets take a look at the steps required:</p>
+<ol>
+<li>Go to the &ldquo;Sources&rdquo; tab</li>
+<li>Check the (index) file &ndash;&gt; 1st flag part</li>
+<li>Check mycss.css file &ndash;&gt; 2nd flag part</li>
+<li>Get clue on myjs.js file. Do you know which file are they talking about?</li>
+<li>Add &ldquo;/robots.txt&rdquo; to the URL &ndash;&gt; 3rd flag part. There&rsquo;s a clue in it about an access configuration file.</li>
+<li>Remove previous one and add &ldquo;/.htaccess&rdquo; &ndash;&gt; 4th flag part. There&rsquo;s yet another clue in it about the macOS storage system</li>
+<li>Remove previous one and add &ldquo;/.DS_Store&rdquo; &ndash;&gt; 5th flag part</li>
+</ol>
+<p>All files in a website may contain valuable information for possible exploitation! Specially if those are configuration files that could be tempered with.</p>
+<p> 
+ </p>
+<hr>
+<p>will add more, just don&rsquo;t really know when :P</p>
+<hr>
+
+    </article>
+</div>
+
+
+        
+<nav role="navigation" class="flex-container bottom-menu">
+    
+<hr />
+<p>
+
+
+    
+        <a href="/posts">back</a>
+        
+            &#183;
+        
+    
+
+    
+        
+            <a href="/posts">Some things I write</a>
+        
+    
+    
+        
+            &#183; 
+            <a href="/about">Who&#39;s Andre?</a>
+        
+    
+    
+    
+
+</p>
+</nav>
+
+    </main>
+    
+    <footer class="flex-container footer">
+</footer>
+    
+    
+</body>
+
+</html>
